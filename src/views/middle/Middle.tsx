@@ -20,8 +20,8 @@ const Middle = () => {
         if(key !== "up"){
             hoz.classList.add("active");
             ver.classList.add("active");
-            hoz.style.top = y + 'px';
-            ver.style.left = x + 'px';
+            hoz.style.top = y - 1 + 'px';
+            ver.style.left = x - 1 + 'px';
         }else{
             hoz.classList.remove("active");
             ver.classList.remove("active");
