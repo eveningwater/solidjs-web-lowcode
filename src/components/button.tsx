@@ -29,6 +29,15 @@ const Button = (props) => {
             }
         }
     }
+    const onAddHandler = (event) => {
+        props.onDragHandler && props.onDragHandler({
+            type:Button,
+            key:"button",
+            children:props.children,
+            left:0,
+            top:0
+        },event);
+    }
     return (
         <button 
             className={baseClassName()}
@@ -36,6 +45,7 @@ const Button = (props) => {
             {...props} 
             type="button"
             use:onDrag={onDragHandler}
+            onClick={onAddHandler}
         ></button>
     )
 }
