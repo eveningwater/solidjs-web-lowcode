@@ -15,13 +15,13 @@ module.exports = {
     },
     devtool:"cheap-module-source-map",
     resolve: {
-        extensions: ['.js',".tsx"],
+        extensions: ['.js',".tsx",".ts"],
     },
     
     module:{
         rules:[
             {
-                test:/\.tsx/,
+                test:/\.tsx?/,
                 use:["babel-loader"]
             },
             {

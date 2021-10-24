@@ -1,0 +1,28 @@
+
+@import "../variable.less";
+.lc-btn {
+    display: inline-block;
+    padding: 8px 16px;
+    color:@defaultBtnTextColor;
+    line-height: 1.2;
+    box-sizing: border-box;
+    border: 1px solid @defaultBtnBorderColor;
+    border-radius: 4px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    background: @transparent;
+    transition: color .1s cubic-bezier(0.075, 0.82, 0.165, 1),border-color .3s linear;
+    &.lc-btn-disabled {
+        color:@disabledBtnTextColor;
+        border-color: @disabledBtnBorderColor;
+        background: @disabledBtnBgColor;
+        cursor: not-allowed;
+    }
+    &:focus-visible {
+        outline: none;
+    }
+    &:hover {
+        color:@defaultBtnHoverColor;
+        border-color: @defaultBtnHoverColor;
+    }
+}

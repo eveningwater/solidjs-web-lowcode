@@ -1,8 +1,20 @@
 /* @refresh reload */
-import { createSignal } from "solid-js";
+import Header from "./views/Header/Header";
+import Left from "./views/Left/Left";
+import Middle from "./views/middle/Middle";
+import Right from "./views/Right/Right";
+import "./style/app.less";
 
-function HelloWorld() {
-  const [message] = createSignal("world")
-  return <div>Hello { message() }!</div>;
+function App() {
+  return (
+    <main class="lc-main">
+      <Header></Header>
+      <div className="lc-layout">
+          <Left></Left>
+          <Middle></Middle>
+          <Right></Right>
+      </div>
+    </main>
+  );
 }
-export default HelloWorld;
+export default App;
