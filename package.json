@@ -27,6 +27,7 @@
     "less": "^4.1.2",
     "less-loader": "^10.2.0",
     "mini-css-extract-plugin": "^2.4.3",
+    "redux": "^4.1.1",
     "solid-js": "^1.1.7",
     "solid-refresh": "^0.2.2",
     "style-loader": "^3.3.1",

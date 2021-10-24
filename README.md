@@ -10,6 +10,6 @@ then:
 
 ```shell
 yarn start
-``
+```
 
 Access the `http://localhost:8000/` to  see the project effect.

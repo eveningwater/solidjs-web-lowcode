@@ -11,7 +11,7 @@
     letter-spacing: 1px;
     cursor: pointer;
     background: @transparent;
-    transition: color .1s cubic-bezier(0.075, 0.82, 0.165, 1),border-color .3s linear;
+    transition: all .1s cubic-bezier(0.075, 0.82, 0.165, 1);
     &.lc-btn-disabled {
         color:@disabledBtnTextColor;
         border-color: @disabledBtnBorderColor;
@@ -21,7 +21,7 @@
     &:focus-visible {
         outline: none;
     }
-    &:hover {
+    &:not(.lc-btn-disabled):hover {
         color:@defaultBtnHoverColor;
         border-color: @defaultBtnHoverColor;
     }

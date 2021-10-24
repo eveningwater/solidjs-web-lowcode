@@ -5,4 +5,29 @@
     padding: 20px;
     background: linear-gradient(135deg, @middleBgColor-1 10%,@middleBgColor-2 90%);
     border-top: 1px solid @leftBorderColor;
+    position: relative;
+    overflow: hidden;
+    .lc-btn,.lc-middle-line {
+        position: absolute;
+        left: 0;
+        top: 0;
+        transition: all .3s cubic-bezier(0.075, 0.82, 0.165, 1);
+        &.lc-middle-line{
+            background-color: @HeaderFontColor;
+            visibility: hidden;
+            opacity: 0;
+            &.active {
+                visibility: visible;
+                opacity: 1;
+            }
+            &.lc-middle-line-hoz {
+                width: 100%;
+                height: 2px;
+            }
+            &.lc-middle-line-ver {
+                width: 2px;
+                height: 100%;
+            }
+        }
+    }
 }
