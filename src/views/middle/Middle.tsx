@@ -12,30 +12,29 @@ const Middle = () => {
             container.appendChild(div);
         }
     })
-    const [state] = useAppContext() as any;
+    const [state] = useAppContext();
     const onDragHandler = (key,x,y,el) => {
         if(!el){
             return;
         }
         el.style.left = x + 'px';
         el.style.top = y + 'px';
-        const [hoz,ver] = Array.from(container.children).filter(item => (item as HTMLDivElement).className.indexOf("line") > -1);
+        const [hoz,ver] = Array.from(container.children).filter(item => item.className.indexOf("line") > -1);
         if(key !== "up"){
-            (hoz as HTMLDivElement).classList.add("active");
-            (ver as HTMLDivElement).classList.add("active");
-            (hoz as HTMLDivElement).style.top = y - 1 + 'px';
-            (ver as HTMLDivElement).style.left = x - 1 + 'px';
+            hoz.classList.add("active");
+            ver.classList.add("active");
+            hoz.style.top = y - 1 + 'px';
+            ver.style.left = x - 1 + 'px';
         }else{
-            (hoz as HTMLDivElement).classList.remove("active");
-            (ver as HTMLDivElement).classList.remove("active");
-            (hoz as HTMLDivElement).style.top = "0";
-            (ver as HTMLDivElement).style.left = "0";
+            hoz.classList.remove("active");
+            ver.classList.remove("active");
+            hoz.style.top = 0;
+            ver.style.left = 0;
         }
     }
-    const NewFor = For as any;
     return (
         <section className="lc-middle-page" ref={container}>
-            <NewFor each={ state().componentData }>{
+            <For each={ state().componentData }>{
                 (item) => (
                     <item.type 
                         style={{ left:item.left + 'px',top:item.top + 'px' }} 
@@ -43,7 +42,7 @@ const Middle = () => {
                         dragType="random"
                     >{ item.children }</item.type>
                 )
-            }</NewFor>
+            }</For>
         </section>
     )
 }
