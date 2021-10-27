@@ -2,7 +2,7 @@ import "./left.less";
 import Button from "../../components/button";
 import { useAppContext } from "../../context/context";
 const Left = (props) => {
-    const [state,{ changeState }] = useAppContext();
+    const [state,{ changeState }] = useAppContext() as any;
     const onDragEndHandler = (data) => {
         const { componentData } = state();
         componentData.push(data);

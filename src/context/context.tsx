@@ -1,6 +1,6 @@
 import { createSignal, createContext, useContext } from "solid-js";
 
-const AppContext = createContext();
+const AppContext = createContext() as any;
 export function AppProvider(props) {
   const [state, setState] = createSignal(props.state || {}),
   store = [
