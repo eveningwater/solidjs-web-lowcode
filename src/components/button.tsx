@@ -38,13 +38,14 @@ const Button = (props) => {
             top:0
         },event);
     }
+    const onDragDirective = onDrag;
     return (
         <button 
             className={baseClassName()}
             classList={{ [baseClassName() + "-disabled"]:props.disabled}} 
             {...props} 
             type="button"
-            use:onDrag={onDragHandler}
+            use:onDragDirective={onDragHandler}
             onClick={onAddHandler}
         ></button>
     )

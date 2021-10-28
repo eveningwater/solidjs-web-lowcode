@@ -17,7 +17,6 @@ module.exports = {
     resolve: {
         extensions: ['.js',".tsx",".ts"],
     },
-    
     module:{
         rules:[
             {
