@@ -164,7 +164,8 @@ export class RefLine {
                     }
                     node.classList.add("ref-line-active");
                     // Set the left and top value about the dragging element and the line element
-                    (dragging as HTMLDivElement).style[key] = `${parseInt(condition.dragValue) - parseInt(parentRect[key])}px`;
+                    // 1px difference?
+                    (dragging as HTMLDivElement).style[key] = `${ parseInt(condition.dragValue) - parseInt(parentRect[key]) }px`;
                     condition.lineNode.style[key] = `${ parseInt(condition.lineValue)}px`;
                     // show the line element
                     condition.lineNode.show();
