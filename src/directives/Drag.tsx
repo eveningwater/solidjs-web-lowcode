@@ -1,5 +1,10 @@
 import { DragDrop } from "../utils/drag";
 const $ = selector => document.querySelector(selector);
+const classByTagName = (name) => {
+    if(name === "button"){
+        return "btn";
+    }
+}
 export const onDrag = (el,accessor) => {
     let node = null;
     const type = "dragType".toLowerCase();
@@ -7,18 +12,19 @@ export const onDrag = (el,accessor) => {
     const setCursor = (style) => {
         el.style.cursor = style;
     }
+    const followElementName = el.tagName.toLowerCase();
     const instance = DragDrop(el,(key,dragEl,event) => {
         switch(key){
             case "down":{
                 setCursor("move");
                 isAdd = el.getAttribute(type) === 'add';
                 if(isAdd){
-                    node = document.createElement("button");
-                    node.className = "lc-btn";
-                    node.id = "drag-effect-btn";
+                    node = document.createElement(followElementName);
+                    node.className = "lc-" + classByTagName(followElementName);
+                    node.id = "drag-effect-" + followElementName;
                     node.style.position = "fixed";
                     node.textContent = el.textContent;
-                    if(!$("#drag-effect-btn")){
+                    if(!$("#drag-effect-" + followElementName)){
                         document.body.appendChild(node);
                     }
                 }
@@ -33,7 +39,7 @@ export const onDrag = (el,accessor) => {
             case "up":{
                 setCursor("");
                 if(isAdd){
-                    const shouldRemove = $("#drag-effect-btn");
+                    const shouldRemove = $("#drag-effect-" + followElementName);
                     if(shouldRemove) {
                         shouldRemove.remove();
                     }
