@@ -71,107 +71,113 @@ export class RefLine {
             parentRect = parentNode.getBoundingClientRect();
         this.uncheckNearNode();
         otherNodes.forEach(node => {
-            node.classList.remove("ref-line-active");
-            // Exclude yourself
-            if(dragging === node){
-                return;
-            }
-            // get all property in rect Object
-            let { top,right,left,height,width,bottom } = node.getBoundingClientRect();
-            let dragHalfWidth = dragRect.width / 2,
-                dragHalfHeight = dragRect.height / 2,
-                nodeHalfWidth = width / 2,
-                nodeHalfHeight = height / 2;
-            
-            let conditions:ConditionType = {
-                //Divided into 5 situations
-                top:[
-                    // xt-top
-                    {
-                      isNear: this.isNear(dragRect.top, top),
-                      lineNode: lines.xt,
-                      lineValue: top,
-                      dragValue: top
-                    },
-                    // xt-bottom
-                    {
-                      isNear: this.isNear(dragRect.bottom, top),
-                      lineNode: lines.xt,
-                      lineValue: top,
-                      dragValue: top - dragRect.height
-                    },
-                    // cx
-                    {
-                      isNear: this.isNear(dragRect.top + dragHalfHeight, top + nodeHalfHeight),
-                      lineNode: lines.xc,
-                      lineValue: top + nodeHalfHeight,
-                      dragValue: top + nodeHalfHeight - dragHalfHeight
-                    },
-                    // xb-top
-                    {
-                      isNear: this.isNear(dragRect.bottom, bottom),
-                      lineNode: lines.xb,
-                      lineValue: bottom,
-                      dragValue: bottom - dragRect.height
-                    },
-                    // xb-bottom
-                    {
-                      isNear: this.isNear(dragRect.top, bottom),
-                      lineNode: lines.xb,
-                      lineValue: bottom,
-                      dragValue: bottom
-                    }
-                ],
-                left:[
-                    {
-                        isNear: this.isNear(dragRect.left, left),
-                        lineNode: lines.yl,
-                        lineValue: left,
-                        dragValue: left
-                      },
-                      {
-                        isNear: this.isNear(dragRect.right, left),
-                        lineNode: lines.yl,
-                        lineValue: left,
-                        dragValue: left - dragRect.width
-                      },
-                      {
-                        isNear: this.isNear(dragRect.left + dragHalfWidth, left + nodeHalfWidth),
-                        lineNode: lines.yc,
-                        lineValue: left + nodeHalfWidth,
-                        dragValue: left + nodeHalfWidth - dragHalfWidth
-                      },
-                      {
-                        isNear: this.isNear(dragRect.right, right),
-                        lineNode: lines.yr,
-                        lineValue: right,
-                        dragValue: right - dragRect.width
-                      },
-                      {
-                        isNear: this.isNear(dragRect.left, right),
-                        lineNode: lines.yr,
-                        lineValue: right,
-                        dragValue: right
-                      }
-                ]
-            };
-
-            for(let key in conditions){
-                conditions[key].forEach(condition => {
-                    // If two nodes are not approaching,do nothing!
-                    if(!condition.isNear){
-                        return;
-                    }
-                    node.classList.add("ref-line-active");
-                    // Set the left and top value about the dragging element and the line element
-                    // 1px difference?
-                    (dragging as HTMLDivElement).style[key] = `${ parseInt(condition.dragValue) - parseInt(parentRect[key]) }px`;
-                    condition.lineNode.style[key] = `${ parseInt(condition.lineValue)}px`;
-                    // show the line element
-                    condition.lineNode.show();
-                })
-            }
-        })
+            this.diffNearNode(dragging,node,dragRect,parentRect);
+        });
+    }
+    diffNearNode(dragging,node,dragRect,parentRect){
+        node.classList.remove("ref-line-active");
+        // Exclude yourself
+        if(dragging === node){
+            return;
+        }
+        // get all property in rect Object
+        let { top,right,left,height,width,bottom } = node.getBoundingClientRect();
+        let dragHalfWidth = dragRect.width / 2,
+            dragHalfHeight = dragRect.height / 2,
+            nodeHalfWidth = width / 2,
+            nodeHalfHeight = height / 2;
+        
+        let conditions:ConditionType = {
+            //Divided into 5 situations
+            top:[
+                // xt-top
+                {
+                  isNear: this.isNear(dragRect.top, top),
+                  lineNode: lines.xt,
+                  lineValue: Math.abs(top - parentRect.top - 1),
+                  dragValue: top
+                },
+                // xt-bottom
+                {
+                  isNear: this.isNear(dragRect.bottom, top),
+                  lineNode: lines.xt,
+                  lineValue: Math.abs(top - parentRect.top - 1),
+                  dragValue: top - dragRect.height
+                },
+                // cx
+                {
+                  isNear: this.isNear(dragRect.top + dragHalfHeight, top + nodeHalfHeight),
+                  lineNode: lines.xc,
+                  lineValue: Math.abs(top + nodeHalfHeight - parentRect.top - 1),
+                  dragValue: top + nodeHalfHeight - dragHalfHeight
+                },
+                // xb-top
+                {
+                  isNear: this.isNear(dragRect.bottom, bottom),
+                  lineNode: lines.xb,
+                  lineValue: Math.abs(bottom - parentRect.top - 1),
+                  dragValue: bottom - dragRect.height
+                },
+                // xb-bottom
+                {
+                  isNear: this.isNear(dragRect.top, bottom),
+                  lineNode: lines.xb,
+                  lineValue: Math.abs(bottom - parentRect.top - 1),
+                  dragValue: bottom
+                }
+            ],
+            left:[
+                {
+                    isNear: this.isNear(dragRect.left, left),
+                    lineNode: lines.yl,
+                    lineValue: Math.abs(left - parentRect.left),
+                    dragValue: left
+                  },
+                  {
+                    isNear: this.isNear(dragRect.right, left),
+                    lineNode: lines.yl,
+                    lineValue: Math.abs(left - parentRect.left),
+                    dragValue: left - dragRect.width
+                  },
+                  {
+                    isNear: this.isNear(dragRect.left + dragHalfWidth, left + nodeHalfWidth),
+                    lineNode: lines.yc,
+                    lineValue: Math.abs(left + nodeHalfWidth - parentRect.left),
+                    dragValue: left + nodeHalfWidth - dragHalfWidth
+                  },
+                  {
+                    isNear: this.isNear(dragRect.right, right),
+                    lineNode: lines.yr,
+                    lineValue: Math.abs(right - parentRect.left),
+                    dragValue: right - dragRect.width
+                  },
+                  {
+                    isNear: this.isNear(dragRect.left, right),
+                    lineNode: lines.yr,
+                    lineValue: Math.abs(right - parentRect.left),
+                    dragValue: right
+                  }
+            ]
+        };
+        for(let key in conditions){
+            conditions[key].forEach(condition => {
+                // If two nodes are not approaching,do nothing!
+                if(!condition.isNear){
+                    return;
+                }
+                node.classList.add("ref-line-active");
+                // Set the left and top value about the dragging element and the line element
+                // 1px difference?
+                const dragValue = parseInt(condition.dragValue) - parseInt(parentRect[key]);
+                const dragLimitValue = Math.min(Math.max(dragValue,0),(key === "left" ? parentRect.width - width : parentRect.height - height));
+                    (dragging as HTMLDivElement).style[key] = `${ dragLimitValue }px`;
+                const lineValue = parseInt(condition.lineValue);
+                const lineLimitValue = Math.min(Math.max(0,lineValue),(key === "left" ? parentRect.width - width : parentRect.height - height));
+                condition.lineNode.style[key] = `${ lineLimitValue }px`;
+                // show the line element
+                condition.lineNode.show();
+            })
+        }
     }
     uncheckNearNode(){
         // hide the node

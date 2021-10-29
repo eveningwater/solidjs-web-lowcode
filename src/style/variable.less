@@ -20,3 +20,19 @@
 // the middle
 @middleBgColor-1:#fdfdfd;
 @middleBgColor-2:#e6e6e6;
+
+@full:1;
+@half:0.5;
+
+@display:flex,block,inline-block,inline-flex,inline,none;
+@position:absolute,relative,fixed;
+@cursor:pointer,zoom-in,zoom-out,default,not-allowed;
+@baseSelector:lc-;
+@box-sizing:border-box,content-box;
+@align:center,left,right;
+// mixin
+.flex-center {
+    display: extract(@display,@full);
+    align-items: extract(@align,@full);
+    justify-content: extract(@align,@full);
+}

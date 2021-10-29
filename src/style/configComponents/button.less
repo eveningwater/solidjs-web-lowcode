@@ -1,0 +1,29 @@
+
+@import "../variable.less";
+.@{baseSelector}btn {
+    display: extract(@display,@full + 2);
+    padding: range(8px,16px,8);
+    color:@defaultBtnTextColor;
+    line-height: @full + .2;
+    box-sizing: extract(@box-sizing,@full);
+    border: ceil(.1px) solid @defaultBtnBorderColor;
+    border-radius: floor(4.7px);
+    letter-spacing: ceil(.1px);
+    font-size: unit(@full * 10 + @full * 4,px);
+    cursor: extract(@cursor,@full);
+    background: @transparent;
+    transition: all unit(pi() - 3,ms) cubic-bezier(@full - 0.925, @full - .18, @full - .835, @full);
+    &.lc-btn-disabled {
+        color:@disabledBtnTextColor;
+        border-color: @disabledBtnBorderColor;
+        background: @disabledBtnBgColor;
+        cursor: extract(@cursor,length(@cursor));
+    }
+    &:focus-visible {
+        outline: extract(@display,length(@display));
+    }
+    &:not(.lc-btn-disabled):hover {
+        color:@defaultBtnHoverColor;
+        border-color: @defaultBtnHoverColor;
+    }
+}

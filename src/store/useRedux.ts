@@ -1,5 +1,6 @@
 import { onCleanup } from "solid-js";
 import { createStore, reconcile } from "solid-js/store";
+import { ActionsType } from "./actions";
 export const useReducer = (reducer, state) => {
     const [store, setStore] = createStore(state);
     const dispatch = (action) => {
@@ -25,5 +26,5 @@ function mapActions(store, actions) {
   for (const key in actions) {
     mapped[key] = (...args) => store.dispatch(actions[key](...args));
   }
-  return mapped;
+  return mapped as { addState:ActionsType };
 }

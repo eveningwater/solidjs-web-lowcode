@@ -1,6 +1,6 @@
 import { createSignal } from "solid-js";
 import { onDrag } from "../directives/Drag";
-import "../style/components/button.less";
+import "../style/configComponents/button.less";
 const Button = (props) => {
     const [baseClassName] = createSignal("lc-btn");
     const onDragHandler = (key,event,dragging) => {

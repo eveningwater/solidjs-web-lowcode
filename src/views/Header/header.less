@@ -1,11 +1,10 @@
 @import "../../style/variable.less";
-.lc-header {
-    width: 100%;
-    height: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+@rotate:@full * 100 + @full * 30 + @full * 5;
+.@{baseSelector}header {
+    width: percentage(@full);
+    height: unit(@half * 100,px);
+    .flex-center();
     color: @HeaderFontColor;
-    background: linear-gradient(135deg,@headerBgColor-1 10%,@headerBgColor-2 90%);
-    letter-spacing: 2px;
+    background: linear-gradient(unit(@rotate,deg),@headerBgColor-1 percentage((@full / 10)),@headerBgColor-2 percentage((@full * 9 / 10)));
+    letter-spacing: unit(round(@full) * 2,px);
 }

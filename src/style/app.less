@@ -1,9 +1,10 @@
+@import "./variable.less";
 .app {
-    .lc-main {
-        .lc-layout {
-            display: flex;
-            position: relative;
-            width: 100%;
+    .@{baseSelector}main {
+        .@{baseSelector}layout {
+            display: extract(@display,@full);
+            position: extract(@position,length(@position) - 1);
+            width: percentage(@full);
             min-height: calc(100vh - 50px);
         }
     }
